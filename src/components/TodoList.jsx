@@ -7,22 +7,21 @@ import '../components/todoList.css'
 
 export default function TodoList() {
     const { state, dispatch } = useContext(todoContext);
-    const deleteHandler = (todo) => {
-        let idx = state.todos.indexOf(todo)
-        dispatch({ type: DELETE_TODO, payload: idx })
+    const deleteHandler = (index) => {
+        dispatch({ type: DELETE_TODO, payload: index })
     }
-    const changeColorHandler = (todo) => {
-        dispatch({ type: CHANGE_COLOR, payload: todo })
+    const changeColorHandler = (index) => {
+        dispatch({ type: CHANGE_COLOR, payload: index })
     }
     return (
         <div>
             <h1> Todo List </h1>
             {state.todos.length > 0 &&
-                state.todos.map((todo, id) => {
-                    return <h4 key={id}>
-                        <span className={state.isChangeColor === true ? 'colored' : 'ordinary'}>{todo}</span>
-                        <button onClick={() => deleteHandler(todo)}>[X]</button>
-                        <button onClick={() => changeColorHandler()}>[V]</button>
+                state.todos.map((todo, index) => {
+                    return <h4 key={index}>
+                        <span className={todo.isChangeColor === true ? 'colored' : 'ordinary'}>{todo.text}</span>
+                        <button onClick={() => deleteHandler(index)}>[X]</button>
+                        <button onClick={() => changeColorHandler(index)}>[V]</button>
                     </h4>;
                 })}
         </div >

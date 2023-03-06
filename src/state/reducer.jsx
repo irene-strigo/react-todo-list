@@ -1,8 +1,14 @@
 import { ADD_TODO, CHANGE_COLOR, DELETE_TODO } from "./actionTypes";
 
-export const initialState = {
-    todos: [],
+/*
+{
+    id: '', // хороший стиль предполагает его наличие
+    text: '',
     isChangeColor: false
+}
+*/
+export const initialState = {
+    todos: []
 };
 
 const reducer = (state, action) => {
@@ -10,16 +16,31 @@ const reducer = (state, action) => {
         case ADD_TODO:
             return {
                 ...state,
-                todos: [...state.todos, action.payload]
+                todos: [...state.todos,
+                {
+                    text: action.payload,
+                    isChangeColor: false
+                }
+                ]
             };
         case DELETE_TODO:
             return {
+                ...state,
                 todos: state.todos.filter((todo, i) => action.payload !== i)
             };
         case CHANGE_COLOR:
             return {
                 ...state,
-                isChangeColor: true
+                todos: state.todos.map((todo, i) => {
+                    if (action.payload !== i) {
+                        return todo
+                    }
+
+                    return {
+                        ...todo,
+                        isChangeColor: !todo.isChangeColor
+                    }
+                })
             };
         default:
             return state;
