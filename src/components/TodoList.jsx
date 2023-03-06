@@ -19,7 +19,7 @@ export default function TodoList() {
             {state.todos.length > 0 &&
                 state.todos.map((todo, index) => {
                     return <h4 key={index}>
-                        <span className={todo.isChangeColor === true ? 'colored' : 'ordinary'}>{todo.text}</span>
+                        <span className={todo.isChangeColor === true ? 'colored' : 'ordinary'}>{index + 1}.{todo.text}</span>
                         <button onClick={() => deleteHandler(index)}>[X]</button>
                         <button onClick={() => changeColorHandler(index)}>[V]</button>
                     </h4>;

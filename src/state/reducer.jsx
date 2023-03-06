@@ -19,6 +19,7 @@ const reducer = (state, action) => {
                 todos: [...state.todos,
                 {
                     text: action.payload,
+                    /*count: state.todos.length + 1,*/
                     isChangeColor: false
                 }
                 ]

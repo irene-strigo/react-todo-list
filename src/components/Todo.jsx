@@ -10,6 +10,7 @@ export default function Todo() {
         e.preventDefault();
         dispatch({ type: ADD_TODO, payload: todo });
         setTodo("");
+
     };
 
     return (
